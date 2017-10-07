@@ -25,19 +25,24 @@ class Output extends React.Component {
     const parsedNum = parseInt(num, 10);
     let processedText = '';
     let isValid = false;
-    console.log(parsedNum);
-    if (numberOfWords % parsedNum !== 0 && !isNaN(parsedNum)) {
-      processedText = 'ERROR! Number of words MOD Number of emotes between words should equal 0!';
+
+    if (numberOfWords === 0) {
+      processedText = 'ERROR! Please enter your raw meme (without emotes)!';
     } else if (isNaN(parsedNum)) {
       processedText = 'ERROR! Please enter number of emotes between words!';
+    } else if (numberOfWords % parsedNum !== 0 && !isNaN(parsedNum)) {
+      processedText = 'ERROR! Number of words MOD Number of emotes between words should equal 0!';
     } else {
       const regex = `\\b\\w+(\\s\\w+){${parsedNum - 1}}\\b`;
       const stringArr = string.replace(/\\s{2,}/g, ' ')
         .match(new RegExp(regex, 'g'));
 
       const emote = propEmote.replace(/\/s{2,}/g, ' ');
+
       const newStringArr = stringArr.map((str, idx) => {
-        return str + ' ' + emote;
+        const emoteAddition = emote === '' ? '' : ` ${emote}`;
+
+        return str + emoteAddition;
       });
 
       processedText = newStringArr.join(' ');
@@ -49,38 +54,34 @@ class Output extends React.Component {
 
   render() {
     const { isValid, processedText } = this.create();
+    const preClassnames = classnames({
+      result__pre: true,
+      'result__pre--error': !isValid,
+    });
     let validationState;
-    let copyButton;
+    let copyAnchor;
 
     if (isValid) {
-      validationState = 'null';
-      copyButton = (
+      validationState = null;
+      copyAnchor = (
         <CopyToClipboard text={processedText}>
-          <Button>Copy</Button>
+          <span>- <a className="result__anchor-copy">Copy to Clipboard</a></span>
         </CopyToClipboard>
       );
     } else {
       validationState = 'error';
-      copyButton = (
-        <Button disabled>Copy Not Available</Button>
-      );
+      copyAnchor = '';
     }
 
     return (
-      <FormGroup validationState={validationState}>
-        <InputGroup>
-          <FormControl
-            type="text"
-            placeholder="string"
-            className="input-block--disabled"
-            value={processedText}
-            disabled
-          />
-          <InputGroup.Button>
-            {copyButton}
-          </InputGroup.Button>
-        </InputGroup>
-      </FormGroup>
+      <div>
+        <h4 className="header__title">
+          Result {' '} {copyAnchor}
+        </h4>
+        <pre className={preClassnames}>
+          {processedText}
+        </pre>
+      </div>
     );
   }
 }
@@ -119,8 +120,7 @@ class CInput extends React.Component {
           <Col xs={12}>
             <h5 className="header__title">Enter Your Meme</h5>
             <FormControl
-              type="text"
-              placeholder="how long can this go on"
+              placeholder="Example: how long can this go on"
               onChange={this.onChange('string')}
               className="input-block"
               value={string}
@@ -128,8 +128,7 @@ class CInput extends React.Component {
 
             <h5 className="header__title">Enter Your Emote-Between-Texts</h5>
             <FormControl
-              type="text"
-              placeholder="FeelsBadMan :pick:"
+              placeholder="Example: FeelsBadMan :pick:"
               onChange={this.onChange('emote')}
               className="input-block"
               value={emote}
@@ -137,14 +136,12 @@ class CInput extends React.Component {
 
             <h5 className="header__title">Enter Number of Words Between Emotes</h5>
             <FormControl
-              type="text"
-              placeholder="1"
+              placeholder="Example: 1"
               onChange={this.onChange('num')}
               className="input-block"
               value={num}
             />
 
-            <h4 className="header__title">Result</h4>
             <Output
               string={string}
               emote={emote}

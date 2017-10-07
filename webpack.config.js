@@ -8,6 +8,7 @@ const WebpackMd5Hash = require('webpack-md5-hash');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HardSourceWebpackPlugin = require('hard-source-webpack-plugin');
 const NodeObjectHash = require('node-object-hash')
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const nodeEnv = process.env.NODE_ENV;
 const isProd = nodeEnv === 'production';
@@ -56,6 +57,11 @@ if (isProd) {
       debug: false
     }),
     new webpack.optimize.UglifyJsPlugin(),
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'vendor',
+      chunks: ['index'],
+      minChunks: ({ resource }) => /node_modules/.test(resource),
+    }),
     new WebpackMd5Hash(),
     new ManifestPlugin(),
     new ChunkManifestPlugin({
@@ -65,6 +71,12 @@ if (isProd) {
     new ExtractTextPlugin({
       filename: 'css/[name].[chunkhash].css',
       allChunks: true,
+    }),
+    new HtmlWebpackPlugin({
+      title: 'Twitch Emote Between Texts',
+      filename: '../index.html',
+      inject: true,
+      template: '../../resources/views/index-prod.ejs',
     })
   );
 
@@ -114,15 +126,6 @@ if (isProd) {
   });
 }
 
-// Split each entry to app and vendor bundle
-plugins.push(
-  new webpack.optimize.CommonsChunkPlugin({
-    name: 'vendor',
-    chunks: ['index'],
-    minChunks: ({ resource }) => /node_modules/.test(resource),
-  })
-);
-
 // Configuration
 module.exports = {
   devtool: isProd ? 'source-map' : 'eval',
@@ -134,7 +137,7 @@ module.exports = {
     path: buildPath + '/assets/',
     filename: isProd ? 'js/[name].[chunkhash].js' : 'js/[name].js',
     chunkFilename: isProd ? 'js/[name].[chunkhash].js' : 'js/[name].js',
-    publicPath: '/assets/'
+    publicPath: 'assets/'
   },
   module: {
     loaders: loaders
@@ -147,7 +150,7 @@ module.exports = {
   },
   plugins,
   devServer: {
-    contentBase: './resources/dev',
+    contentBase: './resources/views',
     historyApiFallback: true,
     port: 3000,
     hot: true,

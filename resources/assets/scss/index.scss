@@ -27,8 +27,33 @@
   margin-bottom: 15px;
   border-radius: 2px;
   color: #00003F;
+}
 
-  &--disabled {
-    color: gray;
+.result {
+  &__pre {
+    white-space: pre-wrap;
+    white-space: -moz-pre-wrap;
+    white-space: -pre-wrap;
+    white-space: -o-pre-wrap;
+    word-wrap: break-word;
+
+    background: white;
+    color: black;
+
+    &--error {
+      border: 2px solid red;
+    }
+  }
+
+  &__anchor-copy {
+    color: #ddd;
+    cursor: pointer;
+
+    &:hover,
+    &:focus {
+      color: #aaa;
+      text-decoration: none;
+      outline: 0;
+    }
   }
 }
