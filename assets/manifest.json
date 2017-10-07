@@ -1,5 +1,14 @@
 {
+  "fonts/glyphicons-halflings-regular.eot": "fonts/glyphicons-halflings-regular.f4769f9bdb7466be65088239c12046d1.eot",
+  "fonts/glyphicons-halflings-regular.svg": "fonts/glyphicons-halflings-regular.89889688147bd7575d6327160d64e760.svg",
+  "fonts/glyphicons-halflings-regular.ttf": "fonts/glyphicons-halflings-regular.e18bbf611f2a2e43afc071aa2f4e1512.ttf",
+  "fonts/glyphicons-halflings-regular.woff": "fonts/glyphicons-halflings-regular.fa2772327f55d8198301fdb8bcfc8158.woff",
+  "fonts/glyphicons-halflings-regular.woff2": "fonts/glyphicons-halflings-regular.448c34a56d699c29117adc64c43affeb.woff2",
   "img/twitch.png": "img/twitch.7c04da22a81e86c970d3d9fe1cac7494.png",
-  "index.js": "js/index.0364b5d13bf68fa24bb9.js",
-  "vendor.js": "js/vendor.709ac401d9af3041f0f1.js"
+  "index.css": "css/index.69dce2eab3da4517f176.css",
+  "index.css.map": "css/index.69dce2eab3da4517f176.css.map",
+  "index.js": "js/index.69dce2eab3da4517f176.js",
+  "vendor.css": "css/vendor.6b9ffd50c7244f405f47.css",
+  "vendor.css.map": "css/vendor.6b9ffd50c7244f405f47.css.map",
+  "vendor.js": "js/vendor.6b9ffd50c7244f405f47.js"
 }
