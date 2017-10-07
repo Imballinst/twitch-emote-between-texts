@@ -65,8 +65,8 @@ class Output extends React.Component {
 
 Output.propTypes = {
   string: PropTypes.string.isRequired,
-  num: PropTypes.num.isRequired,
-  emote: PropTypes.emote.isRequired,
+  num: PropTypes.string.isRequired,
+  emote: PropTypes.string.isRequired,
 };
 
 export default Output;
