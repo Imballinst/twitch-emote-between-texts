@@ -24,9 +24,12 @@
   },
   "homepage": "https://github.com/Imballinst/twitch-emote-between-texts#readme",
   "dependencies": {
+    "bootstrap-sass": "^3.3.7",
+    "classnames": "^2.2.5",
     "prop-types": "^15.5.10",
     "react": "^15.5.4",
-    "react-bootstrap": "^0.31.0",
+    "react-bootstrap": "^0.31.3",
+    "react-copy-to-clipboard": "^5.0.1",
     "react-dom": "^15.5.4"
   },
   "devDependencies": {
