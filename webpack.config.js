@@ -15,7 +15,7 @@ const isProd = nodeEnv === 'production';
 
 const cachePath = path.join(__dirname, './node_modules/.cache');
 const resourcePath = path.join(__dirname, './resources/assets');
-const buildPath = path.join(__dirname, './public');
+const buildPath = path.join(__dirname);
 
 // Common plugins
 const plugins = [
