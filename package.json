@@ -4,6 +4,7 @@
   "description": "Increases your productivity when spamming in Twitch Chat. xD",
   "main": "index.js",
   "scripts": {
+    "test": "node_modules/.bin/eslint --fix resources/assets/js/*.js",
     "build": "npm run clean && NODE_ENV=production webpack",
     "clean": "node resources/build/PublicFileDeleteUtil.js",
     "wds": "webpack-dev-server"
@@ -23,6 +24,7 @@
     "url": "https://github.com/Imballinst/twitch-emote-between-texts/issues"
   },
   "homepage": "https://github.com/Imballinst/twitch-emote-between-texts#readme",
+  "pre-commit": "test",
   "dependencies": {
     "bootstrap-sass": "^3.3.7",
     "classnames": "^2.2.5",
@@ -62,6 +64,7 @@
     "lodash": "^4.17.4",
     "nock": "^9.0.13",
     "node-sass": "^4.5.3",
+    "pre-commit": "^1.2.2",
     "react-addons-test-utils": "^15.5.1",
     "redux-mock-store": "^1.2.3",
     "sass-loader": "^6.0.5",
